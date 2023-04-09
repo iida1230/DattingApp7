@@ -7,7 +7,8 @@ namespace API.Data
     {
         public DataContext(DbContextOptions options) :base(options)
         {
-
+            Console.WriteLine("-------------------options------------------");
+            Console.WriteLine(options.ToString());
         }
 
         public DbSet<AppUser> User {get; set;}
