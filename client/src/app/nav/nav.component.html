@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <div class="container" >
+    <a class="navbar-brand" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Dating App</font></font></a>
+
+      <ul class="navbar-nav me-auto mb-2 mb-md-0" *ngIf="accountSevice.currentUserSource$ | async">
+        <li class="nav-item">
+          <a class="nav-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Matches</font></font></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Lists</font></font></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Messages</font></font></a>
+        </li>
+      </ul>
+      <div class="dropdown" *ngIf="accountSevice.currentUserSource$ | async" dropdown>
+        <a class="dropdown-toggle text-light text-decoration-none" dropdownToggle >Welcome User</a>
+        <div class="dropdowon-menu mt-3" style="background-color: azure;" *dropdownMenu>
+          <a class="dropdown-item success" style="color: brown;">Edit profiel</a>
+          <a class="dropdown-item"  (click)="logout()" style="color: brown;">Logout</a>
+        </div>
+      </div>
+      <form  *ngIf="!(accountSevice.currentUserSource$ | async)" #loginForm="ngForm" class="d-flex" (ngSubmit)="login()" autocomplete="off">
+        <input
+          name="username"
+          [(ngModel)]="model.username"
+          class="form-control me-2"
+          type="text" placeholder="Usename">
+        <input
+          name="password"
+          [(ngModel)]="model.password"
+          class="form-control me-2"
+          type="password" placeholder="Password">
+        <button class="btn btn-outline-success" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Login</font></font></button>
+      </form>
+    </div>
+</nav>
