@@ -9,6 +9,8 @@ import { AuthGuard } from './_guards/auth.guard';
 import { TestErrorComponent } from './errors/test-error/test-error.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 
 //ワイルドカートで全パス指定することによりリダイレクトされた場合再度ルートを探す処理でループになることを防ぐ
 //pathが””空文字の場合、childrenの頭の”/”は無効になる
@@ -20,6 +22,7 @@ const routes: Routes = [
     children:[
       {path:"members", component:MemberListComponent, canActivate: [AuthGuard]},
       {path:"members/:username", component:MemberDetailComponent},
+      {path:"member/edit", component:MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard]},
       {path:"lists", component:ListsComponent},
       {path:"messages", component:MessagesComponent},
     ]
