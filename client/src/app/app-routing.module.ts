@@ -11,6 +11,7 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
+import { FormComponent } from './test/form/form.component';
 
 //ワイルドカートで全パス指定することによりリダイレクトされた場合再度ルートを探す処理でループになることを防ぐ
 //pathが””空文字の場合、childrenの頭の”/”は無効になる
@@ -28,6 +29,7 @@ const routes: Routes = [
     ]
   },
   {path:"errors", component:TestErrorComponent},
+  {path:"test", component:FormComponent},
   {path:"not-found", component:NotFoundComponent},
   {path:"server-error", component:ServerErrorComponent},
   {path:"**", component:NotFoundComponent,pathMatch:"full"},

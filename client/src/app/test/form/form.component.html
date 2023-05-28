@@ -1,0 +1,19 @@
+<form [formGroup]="profileForm">
+  <div>
+    <input type="text" formControlName="name" />
+    <div>
+      value: {{ name.value }} / dirty: {{ name.dirty }} / touched:
+      {{ name.touched }}
+    </div>
+  </div>
+</form>
+<div class=" " (click)="serv.get()">ssssssssssssssssssss</div>
+
+<div>
+  <h3>debug</h3>
+  <div>
+    profileForm.value
+    {{ profileForm.controls.name.value }}
+    {{ profileForm.value | json }}
+  </div>
+</div>
