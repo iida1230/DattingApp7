@@ -4,6 +4,7 @@ using API.Extensions;
 using API.Interfaces;
 using API.Middleware;
 using API.Services;
+using API.SignalR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -27,7 +28,11 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 
 // Configure the HTTP request pipeline.
-app.UseCors(builder =>  builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200"));
+app.UseCors(builder =>  
+    builder.AllowAnyHeader().
+    AllowAnyMethod().
+    AllowCredentials().
+    WithOrigins("https://localhost:4200"));
 
 // app.UseHttpsRedirection();
 
@@ -37,6 +42,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapHub<PresenceHub>("hubs/presence");
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;

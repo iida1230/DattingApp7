@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, map } from 'rxjs';
 import { User } from '../_models/use';
 import { environment } from 'src/environments/environment';
+import { PresenceService } from '../_service/presence.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class AccountService {
   private currentUserSource = new BehaviorSubject<User | null>(null);
   // asObservable()でSubjectをObservableに変換してnext()メソッドを使えない状態にしてから渡たす
   currentUserSource$ = this.currentUserSource.asObservable()
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private presenceService:PresenceService) {
     console.log("AccountService__construct")
 
   }
@@ -50,11 +51,13 @@ export class AccountService {
   setCurrentUser(user: User){
     localStorage.setItem('user', JSON.stringify(user));
     this.currentUserSource.next(user);
+    this.presenceService.createHubConnection(user)
   }
 
   logout(){
     localStorage.removeItem("user");
     this.currentUserSource.next(null);
+    this.presenceService.stopHubConnection()
   }
 
 
